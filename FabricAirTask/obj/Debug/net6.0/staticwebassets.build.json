@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "DEq5NsJYMFQOwqKh9xU55+x51ohwdCxRDWmJo6/97Tw=",
+  "Source": "FabricAirTask",
+  "BasePath": "_content/FabricAirTask",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

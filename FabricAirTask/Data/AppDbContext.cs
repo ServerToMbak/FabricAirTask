@@ -10,7 +10,7 @@ namespace FabricAirTask.Data
         {
             try
             {
-                optionsBuilder.UseOracle("User Id=CANDIDATE_USER;Password=SH0W_YOUR_SK!LSS;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=rbsf.w.dedikuoti.lt)(PORT=1521))(CONNECT_DATA=(SID=XE)))");
+                optionsBuilder.UseOracle("Connection string will be here");
                 Console.WriteLine("Connected");
             }catch (Exception ex) { Console.WriteLine(ex.Message); }
            

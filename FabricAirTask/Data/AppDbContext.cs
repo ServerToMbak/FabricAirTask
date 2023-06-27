@@ -8,7 +8,12 @@ namespace FabricAirTask.Data
   
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseOracle("User Id=CANDIDATE_USER;Password=SH0W_YOUR_SK!LSS;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=rbsf.w.dedikuoti.lt)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XE)))");
+            try
+            {
+                optionsBuilder.UseOracle("User Id=CANDIDATE_USER;Password=SH0W_YOUR_SK!LSS;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=rbsf.w.dedikuoti.lt)(PORT=1521))(CONNECT_DATA=(SID=XE)))");
+                Console.WriteLine("Connected");
+            }catch (Exception ex) { Console.WriteLine(ex.Message); }
+           
         }
         public DbSet<Entity.File> Files { get; set; }
         public DbSet<User> Users { get; set; }

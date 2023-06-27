@@ -15,5 +15,15 @@
 
             return file;
         }
+
+        public List<Entity.File> getAll()
+        {
+            return _context.Files.ToList();
+        }
+
+       public Entity.File Update(Entity.File file)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FabricAirTask.Data;
+using FabricAirTask.Dto;
 using FabricAirTask.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace FabricAirTask.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Entity.File> AddFile(Entity.File file) 
+        public ActionResult<Entity.File> AddFile(FileCreateDto file) 
         {
             var response = _fileService.AddFile(file);
             return Ok(response);

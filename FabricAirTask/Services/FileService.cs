@@ -1,17 +1,22 @@
-﻿using FabricAirTask.Data;
+﻿using AutoMapper;
+using FabricAirTask.Data;
+using FabricAirTask.Dto;
 
 namespace FabricAirTask.Services
 {
     public class FileService : IFileService
     {
         private IFileRepo _fileRepo;
+        private IMapper _mapper;
 
-        public FileService(IFileRepo fileRepo)
+        public FileService(IFileRepo fileRepo, IMapper mapper)
         {
             _fileRepo = fileRepo;
+            _mapper =  mapper;
         }
-        public Entity.File AddFile(Entity.File file)
+        public Entity.File AddFile(FileCreateDto fileCreateDto)
         {
+           var file = _mapper.Map<Entity.File>(fileCreateDto);
            return _fileRepo.Add(file);
            
         }

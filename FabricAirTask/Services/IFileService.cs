@@ -1,8 +1,10 @@
-﻿namespace FabricAirTask.Services
+﻿using FabricAirTask.Dto;
+
+namespace FabricAirTask.Services
 {
     public interface IFileService
     {
-        public Entity.File AddFile(Entity.File file);
+        public Entity.File AddFile(FileCreateDto file);
         public List<Entity.File> GetAll();
     }
 }

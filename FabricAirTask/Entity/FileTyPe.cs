@@ -2,9 +2,9 @@
 {
     public enum FileType
     {
-        Drawing,
-        Picture,
-        Report,
-        Manual
+        Drawing=0,
+        Picture=1,
+        Report=2,
+        Manual=3
     }
 }

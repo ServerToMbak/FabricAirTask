@@ -3,7 +3,7 @@ using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 
 namespace FabricAirTask.MapperProfiles
-{
+{   
     public class FileProfiles :Profile
     {
         public FileProfiles()

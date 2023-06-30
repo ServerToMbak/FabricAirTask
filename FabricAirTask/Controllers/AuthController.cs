@@ -24,5 +24,10 @@ namespace FabricAirTask.Controllers
 
             return Ok(response);
         }
+        [HttpPost("login")]
+        public ActionResult<User> Login(LoginDto login) 
+        {
+            return Ok(_authService.Login(login.Email, login.Password));
+        }
     }
 }

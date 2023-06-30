@@ -23,7 +23,14 @@ namespace FabricAirTask.Services
 
         public List<Entity.File> GetAll()
         {
-            return _fileRepo.getAll();
+            return _fileRepo.GetAll();
         }
+
+        public List<Entity.File> GetAllFilesByUserName(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+      
     }
 }

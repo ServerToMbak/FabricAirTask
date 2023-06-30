@@ -16,12 +16,17 @@
             return file;
         }
 
-        public List<Entity.File> getAll()
+        public List<Entity.File> GetAll()
         {
             return _context.Files.ToList();
         }
 
-       public Entity.File Update(Entity.File file)
+        public List<Entity.File> GetFilesByUserName(string name)
+        {
+            return _context.Files.Where(opt => opt.User.Name == name).ToList();
+        }
+
+        public Entity.File Update(Entity.File file)
         {
             throw new NotImplementedException();
         }

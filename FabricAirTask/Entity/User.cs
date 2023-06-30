@@ -9,6 +9,6 @@
         public byte[] PasswordHash { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         public string Role { get; set; } = "SalesPeople";
-
+        public List<File> Files { get; set; }
     }
 }

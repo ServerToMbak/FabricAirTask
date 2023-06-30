@@ -19,7 +19,7 @@ namespace FabricAirTask.Data
 
         public List<User> GetAllUser(User user)
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
         public  User GetByEmail(string email)
@@ -30,7 +30,7 @@ namespace FabricAirTask.Data
 
         public User GetUserByName(string name)
         {
-            throw new NotImplementedException();
+            return _context.Users.FirstOrDefault(o => o.Name.ToLower().Equals(name.ToLower()));
         }
 
         public  bool UserExist(string email)

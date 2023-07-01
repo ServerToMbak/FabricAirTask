@@ -1,4 +1,5 @@
 ﻿using FabricAirTask.Data;
+using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
@@ -20,15 +21,15 @@ namespace FabricAirTask.Services
             _userRepo = userRepo;
             _configuration = configuration;
         }
-        public  string Login(string email, string password)
+        public  string Login(LoginDto loginDto)
         {
-            var user = _userRepo.GetByEmail(email);
+            var user = _userRepo.GetByEmail(loginDto.Email);
 
             if (user == null)
             {
                 return "User is not Found";
             }
-            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            else if (!VerifyPasswordHash(loginDto.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return "Please Chech your Password";
             }

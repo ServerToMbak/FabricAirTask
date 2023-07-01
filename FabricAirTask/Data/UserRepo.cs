@@ -1,5 +1,7 @@
 ﻿using FabricAirTask.Entity;
 using Microsoft.EntityFrameworkCore;
+using Oracle.ManagedDataAccess.Client;
+using System.Linq;
 
 namespace FabricAirTask.Data
 {
@@ -17,20 +19,29 @@ namespace FabricAirTask.Data
             _context.SaveChanges(); 
         }
 
-        public List<User> GetAllUser(User user)
+        public List<User> GetAllUser()
         {
             return _context.Users.ToList();
         }
 
         public  User GetByEmail(string email)
         {
-            return  _context.Users.FirstOrDefault(o => o.Email.ToLower().Equals(email.ToLower()));
+            var user = _context.Users.FirstOrDefault(o => o.Email == email);
+            if(user !=null) 
+            {
+                return user;
+            }
+            
+            return null;
             
         }
 
         public User GetUserByName(string name)
         {
-            return _context.Users.FirstOrDefault(o => o.Name.ToLower().Equals(name.ToLower()));
+            string query = "SELECT * FROM Users WHERE Name = :name";
+            return _context.Users.FirstOrDefault(opt => opt.Name.ToLower().Equals(name.ToLower()));
+
+
         }
 
         public  bool UserExist(string email)

@@ -5,7 +5,7 @@ namespace FabricAirTask.Services
     public interface IFileService
     {
         public Entity.File AddFile(FileCreateDto file);
-        public List<Entity.File> GetAll();
+        public List<FileReadDto> GetAll();
         public List<Entity.File> GetAllFilesByUserName(string userName);
     }
 }

@@ -21,14 +21,15 @@ namespace FabricAirTask.Services
            
         }
 
-        public List<Entity.File> GetAll()
+        public List<FileReadDto> GetAll()
         {
-            return _fileRepo.GetAll();
+            var files= _mapper.Map<List<FileReadDto>>(_fileRepo.GetAll());
+            return files;
         }
 
         public List<Entity.File> GetAllFilesByUserName(string userName)
         {
-            throw new NotImplementedException();
+           return  _fileRepo.GetFilesByUserName(userName);
         }
 
       

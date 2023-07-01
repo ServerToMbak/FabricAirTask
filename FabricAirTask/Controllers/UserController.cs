@@ -1,4 +1,5 @@
-﻿using FabricAirTask.Entity;
+﻿using FabricAirTask.Dto;
+using FabricAirTask.Entity;
 using FabricAirTask.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,8 +24,8 @@ namespace FabricAirTask.Controllers
            return Ok(_userService.GetAllUsers());
 
         }
-        [HttpGet]
-        public ActionResult<User> GetUserByName(string name)
+        [HttpGet("getuserinfo")]
+        public ActionResult<UserDto> GetUserByName(string name)
         {
             var response = _userService.GetUserByName(name);
             

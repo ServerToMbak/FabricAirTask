@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FabricAirTask.Entity
+﻿namespace FabricAirTask.Entity
 {
     public class File
     {
@@ -10,6 +6,7 @@ namespace FabricAirTask.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public FileType FileType { get; set; }
-        public User User { get; set; }
+        //public User User { get; set; }      
+        public int UserId { get; set; }
     }
 }

@@ -11,6 +11,13 @@ namespace FabricAirTask.MapperProfiles
             CreateMap<FileCreateDto, Entity.File>()
                 .ForMember(dest => dest.FileType, opt =>
                 opt.MapFrom(src => Enum.Parse(typeof(FileType), src.FileType, true)));
+
+            //CreateMap<Entity.File, FileReadDto>()
+            //.ForMember(dest => dest.FileType, opt => opt.MapFrom(src => Enum.Parse(typeof(FileType));
+
+            CreateMap<User, UserDto>();
+
+
         }
     }
 }

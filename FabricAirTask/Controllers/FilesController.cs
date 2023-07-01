@@ -23,9 +23,14 @@ namespace FabricAirTask.Controllers
             return Ok(response);
         }
         [HttpGet]
-        public ActionResult<List<Entity.File>> GetFiles()
+        public ActionResult<List<FileReadDto>> GetFiles()
         {
             return Ok(_fileService.GetAll());
+        }
+        [HttpGet("getbyusername")]
+        public ActionResult GetFilesByUserName(string name)
+        {
+            return Ok(_fileService.GetAllFilesByUserName(name));
         }
     }
 }

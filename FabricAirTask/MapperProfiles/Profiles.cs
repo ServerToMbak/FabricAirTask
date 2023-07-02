@@ -4,9 +4,9 @@ using FabricAirTask.Entity;
 
 namespace FabricAirTask.MapperProfiles
 {   
-    public class FileProfiles :Profile
+    public class Profiles :Profile
     {
-        public FileProfiles()
+        public Profiles()
         {
             CreateMap<FileCreateDto, Entity.File>()
                 .ForMember(dest => dest.FileType, opt =>

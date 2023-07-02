@@ -1,4 +1,5 @@
-﻿using FabricAirTask.Entity;
+﻿using FabricAirTask.Dto;
+using FabricAirTask.Entity;
 
 namespace FabricAirTask.Data
 {

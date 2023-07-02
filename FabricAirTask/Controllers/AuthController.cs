@@ -17,7 +17,7 @@ namespace FabricAirTask.Controllers
             _authService = authService;
         }
 
-        [HttpPost("register")]
+        [HttpPost("register")]// Add a new user request
         public  ActionResult<string> Register(RegisterDto user)
         {
             var response =  _authService.Register(new User { Id = user.Id, Email=user.Email, Name = user.Name}, user.Password);

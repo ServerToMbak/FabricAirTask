@@ -1,6 +1,7 @@
 ﻿using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 using FabricAirTask.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FabricAirTask.Controllers
@@ -18,13 +19,16 @@ namespace FabricAirTask.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet]// get all users request.
         public ActionResult<List<User>> GetAllUser()
         {
            return Ok(_userService.GetAllUsers());
 
         }
-        [HttpGet("getuserinfo")]
+        [Authorize(Roles ="Admin")]
+        [HttpGet("getuserinfo")]// get specific user information request.
+                                //it will give the user's name, email and role as user information Data Transfer Object 
+                                //I need to make the name unique its not  unique yet. FluentValidation can be used. 
         public ActionResult<UserDto> GetUserByName(string name)
         {
             var response = _userService.GetUserByName(name);

@@ -23,7 +23,7 @@
 
         public List<Entity.File> GetFilesByUserName(string name)
         {
-            return null;
+            return _context.Files.Where(opt => opt.Name.ToLower().Equals(name.ToLower())).ToList();
         }
 
         public Entity.File Update(Entity.File file)

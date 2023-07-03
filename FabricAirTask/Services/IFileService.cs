@@ -1,11 +1,13 @@
 ﻿using FabricAirTask.Dto;
+using FabricAirTask.Entity;
 
 namespace FabricAirTask.Services
 {
     public interface IFileService
     {
-        public Entity.File AddFile(FileCreateDto file);
+        public FileReadDto AddFile(int userId,FileCreateDto file);
         public List<FileReadDto> GetAll();
-        public List<Entity.File> GetAllFilesByUserName(string userName);
+        public UserFilesDto GetAllFilesByUserName(string userName);
+        public UserFilesDto GetFilesByUserNameWithSeperateType(FileType fileType, string userName);
     }
 }

@@ -12,8 +12,10 @@ namespace FabricAirTask.MapperProfiles
                 .ForMember(dest => dest.FileType, opt =>
                 opt.MapFrom(src => Enum.Parse(typeof(FileType), src.FileType, true)));
 
-            //CreateMap<Entity.File, FileReadDto>()
-            //.ForMember(dest => dest.FileType, opt => opt.MapFrom(src => Enum.Parse(typeof(FileType));
+            CreateMap<Entity.File, FileReadDto>()
+            .ForMember(dest => dest.FileType, opt => opt.MapFrom(src => src.FileType.ToString()));
+
+
 
             CreateMap<User, UserDto>();
 

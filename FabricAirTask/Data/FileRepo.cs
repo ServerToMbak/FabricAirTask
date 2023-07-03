@@ -21,6 +21,11 @@
             return _context.Files.ToList();
         }
 
+        public List<Entity.File> GetFilesByUserId(int userId)
+        {
+            return _context.Files.Where(opt => opt.UserId == userId).ToList();
+        }
+
         public List<Entity.File> GetFilesByUserName(string name)
         {
             return _context.Files.Where(opt => opt.Name.ToLower().Equals(name.ToLower())).ToList();

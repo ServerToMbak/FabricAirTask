@@ -1,27 +1,28 @@
-﻿using FabricAirTask.Data;
+﻿using FabricAirTask.Data.Abstract;
 using FabricAirTask.Dto;
 using FabricAirTask.Entity;
+using FabricAirTask.Services.Abstract;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace FabricAirTask.Services
+namespace FabricAirTask.Services.Concrete
 {
     public class AuthService : IAuthService
     {
-      
+
         private readonly IUserRepo _userRepo;
         private readonly IConfiguration _configuration;
 
         public AuthService(IHttpContextAccessor contextAccessor, IUserRepo userRepo, IConfiguration configuration)
         {
-            
+
             _userRepo = userRepo;
             _configuration = configuration;
         }
-        public  string Login(LoginDto loginDto)
+        public string Login(LoginDto loginDto)
         {
             var user = _userRepo.GetByEmail(loginDto.Email);
 
@@ -47,14 +48,14 @@ namespace FabricAirTask.Services
                 return "User is already exists";
             }
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-            
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-                user.DateCreated = DateTime.Now;
-                _userRepo.AddUser(user);
-                var token= CreateToken(user);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            user.DateCreated = DateTime.Now;
+            _userRepo.AddUser(user);
+            var token = CreateToken(user);
             return "User Created" + token;
-            
+
         }
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
@@ -73,7 +74,7 @@ namespace FabricAirTask.Services
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-        private string CreateToken(User user) 
+        private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {

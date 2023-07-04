@@ -1,5 +1,10 @@
 using FabricAirTask.Data;
+using FabricAirTask.Data.Abstract;
+using FabricAirTask.Data.Concrete;
+using FabricAirTask.Extensions;
 using FabricAirTask.Services;
+using FabricAirTask.Services.Abstract;
+using FabricAirTask.Services.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,15 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IFileRepo, FileRepo>();
-builder.Services.AddScoped<IUserRepo, UserRepo>();
-builder.Services.AddScoped<IFileService, FileService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddApplicationServices();//coming from AppServiceExtensions class
+
 builder.Services.AddDbContext<AppDbContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -32,34 +35,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
-builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "JWTToken_Auth_API",
-        Version = "v1"
-    });
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-});
 
+builder.Services.AddSwaggerDocumentation();//Coming from SwaggerServiceExtensions class
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();

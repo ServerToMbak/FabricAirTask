@@ -1,7 +1,7 @@
 ﻿using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 
-namespace FabricAirTask.Data
+namespace FabricAirTask.Data.Abstract
 {
     public interface IUserRepo
     {

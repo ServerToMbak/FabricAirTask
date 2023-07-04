@@ -1,10 +1,11 @@
-﻿using FabricAirTask.Dto;
+﻿using FabricAirTask.Data.Abstract;
+using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
 using System.Linq;
 
-namespace FabricAirTask.Data
+namespace FabricAirTask.Data.Concrete
 {
     public class UserRepo : IUserRepo
     {
@@ -17,7 +18,7 @@ namespace FabricAirTask.Data
         public void AddUser(User user)
         {
             _context.Users.Add(user);
-            _context.SaveChanges(); 
+            _context.SaveChanges();
         }
 
         public List<User> GetAllUser()
@@ -25,18 +26,18 @@ namespace FabricAirTask.Data
             return _context.Users.ToList();
         }
 
-        public  User GetByEmail(string email)
+        public User GetByEmail(string email)
         {
             var users = _context.Users.ToList();//instead of usinf FirstOrDefault method data get
-            //with this way to taking all data in a List and then checking the email if its exist
-            //because oracle 10 g made a problem with compability of working with LİNQ
-           foreach(var user in users) 
-           {
-                if (user.Email.ToLower()  == email.ToLower())
+                                                //with this way to taking all data in a List and then checking the email if its exist
+                                                //because oracle 10 g made a problem with compability of working with LİNQ
+            foreach (var user in users)
+            {
+                if (user.Email.ToLower() == email.ToLower())
                 {
                     return user;
                 }
-           }
+            }
             return null;
         }
 
@@ -45,7 +46,7 @@ namespace FabricAirTask.Data
             var result = _context.Users.ToList();//same reason with finding the mail method because of LİNQ
             foreach (var user in result)
             {
-                if(user.Name.ToLower() == name.ToLower())
+                if (user.Name.ToLower() == name.ToLower())
                 {
                     return user;
                 }
@@ -53,9 +54,9 @@ namespace FabricAirTask.Data
             return null;
         }
 
-        public  bool UserExist(string email)
+        public bool UserExist(string email)
         {
-            if ( _context.Users.Any(x => x.Email.ToLower().Equals(email.ToLower())))
+            if (_context.Users.Any(x => x.Email.ToLower().Equals(email.ToLower())))
             {
                 return true;
             }

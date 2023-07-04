@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using FabricAirTask.Data;
+using FabricAirTask.Data.Abstract;
 using FabricAirTask.Dto;
 using FabricAirTask.Entity;
+using FabricAirTask.Services.Abstract;
 using System.Runtime.CompilerServices;
 
-namespace FabricAirTask.Services
+namespace FabricAirTask.Services.Concrete
 {
     public class UserService : IUserService
     {

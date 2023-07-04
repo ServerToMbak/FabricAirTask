@@ -1,4 +1,6 @@
-﻿namespace FabricAirTask.Data
+﻿using FabricAirTask.Data.Abstract;
+
+namespace FabricAirTask.Data.Concrete
 {
     public class FileRepo : IFileRepo
     {

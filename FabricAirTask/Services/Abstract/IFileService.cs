@@ -1,7 +1,7 @@
 ﻿using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 
-namespace FabricAirTask.Services
+namespace FabricAirTask.Services.Abstract
 {
     public interface IFileService
     {

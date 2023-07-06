@@ -18,14 +18,14 @@ namespace FabricAirTask.Services.Concrete
             _userRepo = userRepo;
             _mapper = mapper;
         }
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            return _userRepo.GetAllUser();
+            return await _userRepo.GetAllUser();
         }
 
-        public UserDto GetUserByName(string name)
+        public async Task<UserDto> GetUserByName(string name)
         {
-            var user = _userRepo.GetUserByName(name);
+            var user =await _userRepo.GetUserByName(name);
 
             var userDto =  _mapper.Map<UserDto>(user);
             return userDto;

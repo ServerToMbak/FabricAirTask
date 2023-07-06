@@ -4,7 +4,7 @@ using FabricAirTask.Data.Abstract;
 using FabricAirTask.Dto;
 using FabricAirTask.Entity;
 using FabricAirTask.Services.Abstract;
-
+using System.Linq;
 namespace FabricAirTask.Services.Concrete
 {
     public class FileService : IFileService
@@ -19,28 +19,28 @@ namespace FabricAirTask.Services.Concrete
             _mapper = mapper;
             _userService = userService;
         }
-        public FileReadDto AddFile(int userId, FileCreateDto fileCreateDto)
+        public async Task<FileReadDto> AddFile(int userId, FileCreateDto fileCreateDto)
         {
             var file = _mapper.Map<Entity.File>(fileCreateDto);
             file.UserId = userId;
-            _fileRepo.Add(file);
+            await _fileRepo.Add(file);
             var fileReadDto = _mapper.Map<FileReadDto>(file);
 
             return fileReadDto;
 
         }
 
-        public List<FileReadDto> GetAll()
+        public async Task<List<FileReadDto>> GetAll()
         {
-            var files = _mapper.Map<List<FileReadDto>>(_fileRepo.GetAll());
+            var files = _mapper.Map<List<FileReadDto>>(await _fileRepo.GetAll());
             return files;
         }
 
-        public UserFilesDto GetAllFilesByUserName(string userName)
+        public async Task<UserFilesDto> GetAllFilesByUserName(string userName)
         {
 
-            var result = _userService.GetUserByName(userName);
-            var files = _fileRepo.GetFilesByUserId(result.Id);
+            var result =await _userService.GetUserByName(userName);
+            var files =await _fileRepo.GetFilesByUserId(result.Id);
             var fileRead = _mapper.Map<List<FileReadDto>>(files);
 
             return new UserFilesDto
@@ -53,10 +53,11 @@ namespace FabricAirTask.Services.Concrete
             };
         }
 
-        public UserFilesDto GetFilesByUserNameWithSeperateType(FileType fileType, string userName)
+        public async Task<UserFilesDto> GetFilesByUserNameWithSeperateType(FileType fileType, string userName)
         {
-            var result = _userService.GetUserByName(userName);
-            var files = _fileRepo.GetFilesByUserId(result.Id).Where(opt => opt.FileType == fileType);
+            var result =await _userService.GetUserByName(userName);
+            var files = await _fileRepo.GetFilesByUserIdAndByFileType(fileType,result.Id);
+
             var fileRead = _mapper.Map<List<FileReadDto>>(files);
 
             return new UserFilesDto

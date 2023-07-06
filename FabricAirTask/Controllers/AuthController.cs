@@ -18,16 +18,16 @@ namespace FabricAirTask.Controllers
         }
 
         [HttpPost("register")]// Add a new user request
-        public  ActionResult<string> Register(RegisterDto user)
+        public  async Task<ActionResult<string>> Register(RegisterDto user)
         {
-            var response =  _authService.Register(new User { Id = user.Id, Email=user.Email, Name = user.Name}, user.Password);
+            var response =await  _authService.Register(new User { Id = user.Id, Email=user.Email, Name = user.Name}, user.Password);
 
             return Ok(response);
         }
         [HttpPost("login")]
-        public ActionResult<string> Login(LoginDto login) 
+        public async Task<ActionResult<string>> Login(LoginDto login) 
         {
-            var response = _authService.Login(login);
+            var response =await _authService.Login(login);
             return Ok(response);
         }
     }

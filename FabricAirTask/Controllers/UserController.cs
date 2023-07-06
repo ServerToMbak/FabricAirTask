@@ -20,18 +20,18 @@ namespace FabricAirTask.Controllers
         }
 
         [HttpGet]// get all users request.
-        public ActionResult<List<User>> GetAllUser()
+        public async Task<ActionResult<List<User>>> GetAllUser()
         {
-           return Ok(_userService.GetAllUsers());
+           return Ok(await _userService.GetAllUsers());
 
         }
         [Authorize(Roles ="Admin")]
         [HttpGet("getuserinfo")]// get specific user information request.
                                 //it will give the user's name, email and role as user information Data Transfer Object 
                                 //I need to make the name unique its not  unique yet. FluentValidation can be used. 
-        public ActionResult<UserDto> GetUserByName(string name)
+        public async Task<ActionResult<UserDto>> GetUserByName(string name)
         {
-            var response = _userService.GetUserByName(name);
+            var response =await _userService.GetUserByName(name);
             
             if(response == null) 
             {

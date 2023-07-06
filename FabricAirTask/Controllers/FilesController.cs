@@ -20,28 +20,28 @@ namespace FabricAirTask.Controllers
         }
 
         [HttpPost("{userId}")]
-        public ActionResult<FileReadDto> AddFile(int userId, FileCreateDto file) 
+        public async Task<ActionResult<FileReadDto>> AddFile(int userId, FileCreateDto file) 
         {
-            var response = _fileService.AddFile(userId,file);
+            var response =await _fileService.AddFile(userId,file);
             return Ok(response);
         }
         [HttpGet]
-        public ActionResult<List<FileReadDto>> GetFiles()//Get All Group of files request
+        public async Task<ActionResult<List<FileReadDto>>> GetFiles()//Get All Group of files request
         {
-            return Ok(_fileService.GetAll());
+            return Ok(await _fileService.GetAll());
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("getbyusername")]
-        public ActionResult<UserFilesDto> GetFilesByUserName(string name)
+        public async Task<ActionResult<UserFilesDto>> GetFilesByUserName(string name)
         {
-            var response = _fileService.GetAllFilesByUserName(name);
+            var response =await _fileService.GetAllFilesByUserName(name);
 
             return Ok(response);
         }
         [HttpGet("userFilebyfiletype")]
-        public ActionResult<UserFilesDto> GetFilesByUserNameWithSeperateType(FileType fileType, string userName)
+        public async Task<ActionResult<UserFilesDto>> GetFilesByUserNameWithSeperateType(FileType fileType, string userName)
         {
-            var response = _fileService.GetFilesByUserNameWithSeperateType(fileType, userName);
+            var response =await _fileService.GetFilesByUserNameWithSeperateType(fileType, userName);
             return Ok(response);
         }
     }

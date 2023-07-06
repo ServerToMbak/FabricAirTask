@@ -5,10 +5,10 @@ namespace FabricAirTask.Data.Abstract
 {
     public interface IUserRepo
     {
-        public void AddUser(User user);
-        public List<User> GetAllUser();
-        public User GetUserByName(string name);
-        public User GetByEmail(string email);
-        public bool UserExist(string email);
+        public Task<string> AddUser(User user);
+        public Task<List<User>> GetAllUser();
+        public Task<User> GetUserByName(string name);
+        public Task<User> GetByEmail(string email);
+        public Task<bool> UserExist(string email);
     }
 }

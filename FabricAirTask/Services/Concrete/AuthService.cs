@@ -22,9 +22,9 @@ namespace FabricAirTask.Services.Concrete
             _userRepo = userRepo;
             _configuration = configuration;
         }
-        public string Login(LoginDto loginDto)
+        public async Task<string> Login(LoginDto loginDto)
         {
-            var user = _userRepo.GetByEmail(loginDto.Email);
+            var user = await _userRepo.GetByEmail(loginDto.Email);
 
             if (user == null)
             {
@@ -41,9 +41,10 @@ namespace FabricAirTask.Services.Concrete
             }
         }
 
-        public string Register(User user, string password)
+        public async Task<string> Register(User user, string password)
         {
-            if (_userRepo.UserExist(user.Email))
+            var response = await _userRepo.UserExist(user.Email);
+            if (response)
             {
                 return "User is already exists";
             }

@@ -5,7 +5,7 @@ namespace FabricAirTask.Services.Abstract
 {
     public interface IUserService
     {
-        public List<User> GetAllUsers();
-        public UserDto GetUserByName(string name);
+        public Task<List<User>> GetAllUsers();
+        public Task<UserDto> GetUserByName(string name);
     }
 }

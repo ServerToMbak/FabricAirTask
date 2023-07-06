@@ -5,7 +5,7 @@ namespace FabricAirTask.Services.Abstract
 {
     public interface IAuthService
     {
-        public string Login(LoginDto login);
-        public string Register(User user, string password);
+        public Task<string> Login(LoginDto login);
+        public Task<string> Register(User user, string password);
     }
 }

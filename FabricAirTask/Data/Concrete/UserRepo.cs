@@ -22,6 +22,11 @@ namespace FabricAirTask.Data.Concrete
             return "The User Added";
         }
 
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<User>> GetAllUser()
         {
             return await _context.Users.ToListAsync();
@@ -42,6 +47,11 @@ namespace FabricAirTask.Data.Concrete
             return null;
         }
 
+        public Task getById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<User> GetUserByName(string name)
         {
             var result = await _context.Users.ToListAsync();//same reason with finding the mail method because of LİNQ
@@ -53,6 +63,11 @@ namespace FabricAirTask.Data.Concrete
                 }
             }
             return null;
+        }
+
+        public Task Update(int id, User user)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> UserExist(string email)
